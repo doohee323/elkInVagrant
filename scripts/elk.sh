@@ -81,8 +81,7 @@ cp /vagrant/resources/nginx/nginx.conf /etc/nginx/nginx.conf
 nginx -s stop
 nginx
 # curl http://127.0.0.1:8080
-
-
+cp /vagrant/resources/init/$PROJ_NAME.conf /etc/init/$PROJ_NAME.conf
 
 
 ### [etc tools] ############################################################################################################
