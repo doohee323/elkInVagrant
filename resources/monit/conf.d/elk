@@ -1,0 +1,7 @@
+#!monit
+check process jrl
+    with pidfile "/var/run/elk.pid"
+    start program = "start elk"
+    stop program = "stop elk"
+    if failed host 127.0.0.1 port 28080 then restart
+    if 5 restarts within 5 cycles then timeout

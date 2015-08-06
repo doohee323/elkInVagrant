@@ -1,0 +1,19 @@
+# install applications
+
+elasticsearch
+	http://localhost:9200/_plugin/kopf
+	http://localhost:9200/_plugin/head
+	http://localhost:9200/_plugin/bigdesk
+logstash
+kibana
+nginx
+	
+# service flow 
+	nginx
+		http://127.0.0.1:8080
+		/var/log/nginx/access.log
+	logstash
+		send access.log to elasticsearch
+	kibana
+		http://localhost:5601
+
