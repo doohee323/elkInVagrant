@@ -56,7 +56,7 @@ sed -i "s/es1/es3/g" /home/vagrant/node3/start.sh
 sed -i "s/node1/node3/g" /home/vagrant/node3/stop.sh
 sed -i "s/es1/es3/g" /home/vagrant/node3/stop.sh
 
-# $PROJ_DIR/startall.sh
+$PROJ_DIR/startall.sh
 
 ### [install elasticsearch-kopf] ############################################################################################################
 $PROJ_DIR/node1/bin/plugin --install lmenezes/elasticsearch-kopf/1.5.7
@@ -109,7 +109,7 @@ cp /vagrant/resources/init/$PROJ_NAME.conf /etc/init/$PROJ_NAME.conf
 
 
 ### [etc tools] ############################################################################################################
-apt-get install python-software-properties python-setuptools libtool autoconf automake uuid-dev build-essential wget curl git monit -y
+apt-get install python-software-properties python-setuptools libtool autoconf automake uuid-dev build-essential wget curl git -y
 apt-get install ganglia-monitor -y
 
 cp /vagrant/resources/ganglia/gmond.conf /etc/ganglia/gmond.conf

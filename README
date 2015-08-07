@@ -3,23 +3,20 @@ vagrant destroy -f && vagrant up
 
 # install applications
 elasticsearch
-	http://127.0.0.1:9200/_plugin/kopf
-	http://127.0.0.1:9200/_plugin/head
-	http://127.0.0.1:9200/_plugin/bigdesk
+	http://192.168.82.170:9200/_plugin/kopf
+	http://192.168.82.170:9200/_plugin/head
+	http://192.168.82.170:9200/_plugin/bigdesk
 logstash
 kibana
 nginx
 
-# 
-
-
 # service flow 
 	nginx
-		http://127.0.0.1:8080
+		http://192.168.82.170:8080
 		/var/log/nginx/access.log
 	logstash
 		send access.log to elasticsearch
 	kibana
-		http://127.0.0.1:5601
+		http://192.168.82.170:5601
 
-# etc applications for monitoring:ganglia, jmxetric, monit
+# etc applications for monitoring:ganglia, jmxetric
