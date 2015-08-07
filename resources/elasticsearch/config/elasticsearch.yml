@@ -37,18 +37,18 @@
 # Node names are generated dynamically on startup, so you're relieved
 # from configuring them manually. You can tie this node to a specific name:
 #
-#node.name: "Franz Kafka"
+node.name: "node1"
 
 # Every node can be configured to allow or deny being eligible as the master,
 # and to allow or deny to store the data.
 #
 # Allow this node to be eligible as a master node (enabled by default):
 #
-#node.master: true
+node.master: true
 #
 # Allow this node to store data (enabled by default):
 #
-#node.data: true
+node.data: true
 
 # You can exploit these settings to design advanced cluster topologies.
 #
@@ -113,8 +113,12 @@
 # Note, that for development on a local machine, with small indices, it usually
 # makes sense to "disable" the distributed features:
 #
-#index.number_of_shards: 1
-#index.number_of_replicas: 0
+index.number_of_shards: 5
+index.number_of_replicas: 0
+index.mapper.dynamic: true
+index.refresh_interval: "1s"
+action.auto_create_index: true
+action.disable_shutdown: true
 
 # These settings directly affect the performance of index and search operations
 # in your cluster. Assuming you have enough machines to hold shards and
@@ -209,19 +213,19 @@
 
 # Set both 'bind_host' and 'publish_host':
 #
-#network.host: 192.168.0.1
+network.host: localhost
 
 # Set a custom port for the node to node communication (9300 by default):
 #
-#transport.tcp.port: 9300
+transport.tcp.port: 9300
 
 # Enable compression for all communication between nodes (disabled by default):
 #
-#transport.tcp.compress: true
+transport.tcp.compress: true
 
 # Set a custom port to listen for HTTP traffic:
 #
-#http.port: 9200
+http.port: 9200
 
 # Set a custom allowed content length:
 #
@@ -229,7 +233,7 @@
 
 # Disable HTTP completely:
 #
-#http.enabled: false
+http.enabled: true
 
 
 ################################### Gateway ###################################
@@ -244,7 +248,7 @@
 
 # The default gateway type is the "local" gateway (recommended):
 #
-#gateway.type: local
+gateway.type: local
 
 # Settings below control how and when to start the initial recovery process on
 # a full cluster restart (to reuse as much local data as possible when using shared
@@ -301,7 +305,7 @@
 # operational within the cluster. This should be set to a quorum/majority of 
 # the master-eligible nodes in the cluster.
 #
-#discovery.zen.minimum_master_nodes: 1
+discovery.zen.minimum_master_nodes: 2
 
 # Set the time to wait for ping responses from other nodes when discovering.
 # Set this option to a higher value on a slow or congested network
@@ -318,12 +322,12 @@
 #
 # 1. Disable multicast discovery (enabled by default):
 #
-#discovery.zen.ping.multicast.enabled: false
+discovery.zen.ping.multicast.enabled: false
 #
 # 2. Configure an initial list of master nodes in the cluster
 #    to perform discovery when new nodes (master or data) are started:
 #
-#discovery.zen.ping.unicast.hosts: ["host1", "host2:port"]
+discovery.zen.ping.unicast.hosts: ["127.0.0.1:9300","127.0.0.1:9301","127.0.0.1:9302"]
 
 # EC2 discovery allows to use AWS EC2 API in order to perform discovery.
 #

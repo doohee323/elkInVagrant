@@ -24,7 +24,7 @@ cd $PROJ_DIR
 wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.1.tar.gz
 tar xzvf elasticsearch-1.7.1.tar.gz
 mv elasticsearch-1.7.1 $PROJ_DIR/node1
-sudo chown -Rf vagrant:vagrant $PROJ_DIR/node1
+chown -Rf vagrant:vagrant $PROJ_DIR/node1
 cp /vagrant/resources/elasticsearch/config/elasticsearch.yml $PROJ_DIR/node1/config/elasticsearch.yml
 cp /vagrant/resources/elasticsearch/start.sh $PROJ_DIR/node1
 cp /vagrant/resources/elasticsearch/stop.sh $PROJ_DIR/node1
@@ -32,7 +32,31 @@ cp /vagrant/resources/elasticsearch/startall.sh $PROJ_DIR
 cp /vagrant/resources/elasticsearch/stopall.sh $PROJ_DIR
 chmod 777 $PROJ_DIR/node1/*.sh
 chmod 777 $PROJ_DIR/*.sh
-$PROJ_DIR/startall.sh
+
+### [copy elasticsearch nodes] ############################################################################################################
+cd $PROJ_DIR
+cp -Rf $PROJ_DIR/node1 $PROJ_DIR/node2
+cp -Rf $PROJ_DIR/node1 $PROJ_DIR/node3
+chown -Rf vagrant:vagrant $PROJ_DIR/node2
+chown -Rf vagrant:vagrant $PROJ_DIR/node3
+
+sed -i "s/node1/node2/g" /home/vagrant/node2/config/elasticsearch.yml
+sed -i "s/9300/9302/g" /home/vagrant/node2/config/elasticsearch.yml
+sed -i "s/9200/9202/g" /home/vagrant/node2/config/elasticsearch.yml
+sed -i "s/node1/node2/g" /home/vagrant/node2/start.sh
+sed -i "s/es1/es2/g" /home/vagrant/node2/start.sh
+sed -i "s/node1/node2/g" /home/vagrant/node2/stop.sh
+sed -i "s/es1/es2/g" /home/vagrant/node2/stop.sh
+
+sed -i "s/node1/node3/g" /home/vagrant/node3/config/elasticsearch.yml
+sed -i "s/9300/9303/g" /home/vagrant/node3/config/elasticsearch.yml
+sed -i "s/9200/9203/g" /home/vagrant/node3/config/elasticsearch.yml
+sed -i "s/node1/node3/g" /home/vagrant/node3/start.sh
+sed -i "s/es1/es3/g" /home/vagrant/node3/start.sh
+sed -i "s/node1/node3/g" /home/vagrant/node3/stop.sh
+sed -i "s/es1/es3/g" /home/vagrant/node3/stop.sh
+
+# $PROJ_DIR/startall.sh
 
 ### [install elasticsearch-kopf] ############################################################################################################
 $PROJ_DIR/node1/bin/plugin --install lmenezes/elasticsearch-kopf/1.5.7
