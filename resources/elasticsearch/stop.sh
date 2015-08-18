@@ -1,4 +1,4 @@
 #!/bin/bash
 
-ES=/home/vagrant/node1
+ES=$PROJ_DIR/node1
 kill `cat < $ES/bin/es1.pid`
