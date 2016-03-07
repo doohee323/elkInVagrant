@@ -16,7 +16,7 @@ echo 'export SRC_DIR='$SRC_DIR >> $PROJ_DIR/.bashrc
 source $PROJ_DIR/.bashrc
 
 apt-get update
-apt-get install openjdk-7-jdk -y
+apt-get install openjdk-7-jdk curl -y
 apt-get install nginx -y
 
 ### [install elasticsearch] ############################################################################################################
@@ -57,6 +57,8 @@ sed -i "s/es1/es3/g" $PROJ_DIR/node3/start.sh
 sed -i "s/node1/node3/g" $PROJ_DIR/node3/stop.sh
 sed -i "s/es1/es3/g" $PROJ_DIR/node3/stop.sh
 
+chown -Rf vagrant:vagrant $PROJ_DIR
+
 echo "run all 3 nodes!"
 $PROJ_DIR/startall.sh
 
@@ -81,6 +83,8 @@ cp $SRC_DIR/logstash/patterns/nginx $PROJ_DIR/logstash-2.2.2/patterns
 cp $SRC_DIR/logstash/log_list/nginx.conf $PROJ_DIR/logstash-2.2.2/log_list
 #cp $SRC_DIR/logstash/log_list/derp.conf $PROJ_DIR/logstash-2.2.2/log_list
 
+chown -Rf vagrant:vagrant $PROJ_DIR
+
 $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/nginx.conf &
 #$PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/derp.conf &
 
@@ -88,7 +92,10 @@ $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/nginx
 cd $PROJ_DIR
 wget https://download.elastic.co/kibana/kibana/kibana-4.4.1-linux-x64.tar.gz
 tar xzvf kibana-4.4.1-linux-x64.tar.gz
-$PROJ_DIR/kibana-4.4.1-linux-x64/bin/kibana > /dev/null 2>&1 &
+
+chown -Rf vagrant:vagrant $PROJ_DIR
+
+sudo -u vagrant $PROJ_DIR/kibana-4.4.1-linux-x64/bin/kibana > /dev/null 2>&1 &
 # http://localhost:5601
 
 ### [conf nginx] ############################################################################################################

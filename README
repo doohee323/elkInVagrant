@@ -13,7 +13,6 @@ This is a ELK example on vagrant.
 	elasticsearch
 		http://192.168.82.170:9200/_plugin/kopf
 		http://192.168.82.170:9200/_plugin/head
-		http://192.168.82.170:9200/_plugin/bigdesk
 	logstash
 	kibana		http://192.168.82.170:5601
 	nginx		http://192.168.82.170:8080 	# for access test
