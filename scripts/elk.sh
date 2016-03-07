@@ -79,10 +79,10 @@ mkdir $PROJ_DIR/logstash-2.2.2/patterns
 mkdir $PROJ_DIR/logstash-2.2.2/log_list
 cp $SRC_DIR/logstash/patterns/nginx $PROJ_DIR/logstash-2.2.2/patterns
 cp $SRC_DIR/logstash/log_list/nginx.conf $PROJ_DIR/logstash-2.2.2/log_list
-cp $SRC_DIR/logstash/log_list/derp.conf $PROJ_DIR/logstash-2.2.2/log_list
+#cp $SRC_DIR/logstash/log_list/derp.conf $PROJ_DIR/logstash-2.2.2/log_list
 
 $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/nginx.conf &
-$PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/derp.conf &
+#$PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/derp.conf &
 
 ### [install kibana] ############################################################################################################
 cd $PROJ_DIR

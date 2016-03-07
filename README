@@ -1,14 +1,22 @@
+This is a ELK example on vagrant.
+==========================================================================
+
+# Features
+	-. install ELK and make 3 ES nodes.
+	-. configure logstash for json foramt log
+	-. test script for simple query
+
 # run vagrant
-vagrant destroy -f && vagrant up
+	vagrant destroy -f && vagrant up
 
 # install applications
-elasticsearch
-	http://192.168.82.170:9200/_plugin/kopf
-	http://192.168.82.170:9200/_plugin/head
-	http://192.168.82.170:9200/_plugin/bigdesk
-logstash
-kibana
-nginx
+	elasticsearch
+		http://192.168.82.170:9200/_plugin/kopf
+		http://192.168.82.170:9200/_plugin/head
+		http://192.168.82.170:9200/_plugin/bigdesk
+	logstash
+	kibana
+	nginx
 
 # service flow 
 	nginx
@@ -19,12 +27,7 @@ nginx
 	kibana
 		http://192.168.82.170:5601
 
-# logstash filter -> json / ruby
-cp $SRC_DIR/logstash/log_list/derp.conf $PROJ_DIR/logstash-2.2.2/log_list
-$PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/derp.conf
-
-https://codepad.remoteinterview.io/BeamingMysteriousRoadOasis
-
-# group-by query for derp json 
-https://docs.google.com/document/d/1LBAhQR59FTWJ9umOKK8B9MugDMw0f2_HnUkPKBSn-kY/edit?usp=sharing
+# test script
+	You can access to VM from outside like this script.
+	/tz-elk/scripts/elk_test.sh
 
