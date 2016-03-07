@@ -19,4 +19,105 @@ nginx
 	kibana
 		http://192.168.82.170:5601
 
-# etc applications for monitoring:ganglia, jmxetric
+# es field mapping
+
+curl -XDELETE 'http://192.168.82.170:9200/derp'
+
+curl -XPUT 'http://192.168.82.170:9200/derp' -d '
+{
+    "mappings": {
+      "json": {
+      	"_timestamp" : {
+          "enabled" : true
+        },
+        "properties": {
+          "@timestamp": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "@version": {
+            "type": "string"
+          },
+          "asn": {
+            "type": "string"
+          },
+          "client_ip": {
+            "type": "string"
+          },
+          "destination_id": {
+            "type": "string"
+          },
+          "geoip_city": {
+            "type": "string"
+          },
+          "geoip_country_code": {
+            "type": "string"
+          },
+          "geoip_region": {
+            "type": "string"
+          },
+          "host": {
+            "type": "string"
+          },
+          "hostname": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "microsecs": {
+            "type": "date",
+            "format": "epoch_millis"
+          },
+          "path": {
+            "type": "string"
+          },
+          "query_type": {
+            "type": "string"
+          },
+          "response_type": {
+            "type": "string"
+          },
+          "rule_id": {
+            "type": "string"
+          },
+          "ruleset_id": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "date"
+          },
+          "type": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          }
+        }
+      }
+    }
+}
+'
+
+
+          "timestamp2": {
+            "type": "date",
+            "format": "date_optional_time||epoch_millis"
+          },
+
+
+          "timestamp2": {
+            "type": "date",
+            "format": "yyyy-MM-ddTHH:mm:ss.SSS"
+          },
+
+
+2016-03-06T07:19:23.769Z
+2016-01-22 01:00:01.942
+2016-03-06T07:19:23.769Z
+
+
+
+14534244001921
+1453424400
+1457251633
