@@ -5,9 +5,9 @@ set -x
 echo "Reading config...." >&2
 source /vagrant/setup.rc
 
-PROJ_NAME=elk
-PROJ_DIR=/home/vagrant
-SRC_DIR=/vagrant/resources
+export PROJ_NAME=elk
+export PROJ_DIR=/home/vagrant
+export SRC_DIR=/vagrant/resources
 
 echo '' >> $PROJ_DIR/.bashrc
 echo 'export PATH=$PATH:.' >> $PROJ_DIR/.bashrc
