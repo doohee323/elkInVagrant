@@ -13,7 +13,7 @@ cp $SRC_DIR/logstash/log_list/derp.conf $PROJ_DIR/logstash-2.2.2/log_list
 $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/derp.conf &
 
 # make logstash new data recognized 
-cp $PROJ_DIR/data/stats-2016-01-22.log stats-2016-01-23.log
+cp $PROJ_DIR/data/stats-2016-01-22.log $PROJ_DIR/data/stats-2016-01-23.log
 
 # query with hostname
 curl -XPOST 'http://192.168.82.170:9200/derp/_search' -d '
