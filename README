@@ -6,17 +6,17 @@ This is a ELK example on vagrant.
 	-. configure logstash for json foramt log
 	-. test script for simple query
 
-# run vagrant
+# Execution
 	vagrant destroy -f && vagrant up
 
-# install applications
+# installed applications
 	elasticsearch
 		http://192.168.82.170:9200/_plugin/kopf
 		http://192.168.82.170:9200/_plugin/head
 		http://192.168.82.170:9200/_plugin/bigdesk
 	logstash
-	kibana
-	nginx
+	kibana		http://192.168.82.170:5601
+	nginx		http://192.168.82.170:8080 	# for access test
 
 # service flow 
 	nginx
