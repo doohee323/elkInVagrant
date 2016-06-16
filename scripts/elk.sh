@@ -112,7 +112,6 @@ cp $SRC_DIR/nginx/nginx.conf /etc/nginx/nginx.conf
 nginx -s stop
 nginx
 # curl http://127.0.0.1:8080
-cp $SRC_DIR/init/$PROJ_NAME.conf /etc/init/$PROJ_NAME.conf
 
 ### [make test data] ############################################################################################################
 mkdir -p $PROJ_DIR/data

@@ -28,5 +28,5 @@ This is a ELK example on vagrant.
 
 # test script
 	You can access to VM from outside like this script.
-	/tz-elk/scripts/elk_test.sh
+	bash ./scripts/elk_test.sh
 
