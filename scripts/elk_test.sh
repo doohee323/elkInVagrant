@@ -2,21 +2,25 @@
 
 set -x
 
-# remove es index
-curl -XDELETE 'http://192.168.82.170:9200/derp'
+export SRC_DIR=/vagrant/resources
+export PROJ_DIR=/home/vagrant
 
-# run logstash for derp
+# remove es index
+curl -XDELETE 'http://192.168.82.170:9200/test1'
+
+# run logstash for test1
 # logstash filter -> json / ruby
 # You can use ruby for handling data in logstash for that, simply use this site for ruby env.
 # https://codepad.remoteinterview.io/BeamingMysteriousRoadOasis
-cp $SRC_DIR/logstash/log_list/derp.conf $PROJ_DIR/logstash-2.2.2/log_list
-$PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/derp.conf &
+
+cp $SRC_DIR/logstash/log_list/test1.conf $PROJ_DIR/logstash-2.2.2/log_list
+$PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test1.conf &
 
 # make logstash new data recognized 
 cp $PROJ_DIR/data/stats-2016-01-22.log $PROJ_DIR/data/stats-2016-01-23.log
 
 # query with hostname
-curl -XPOST 'http://192.168.82.170:9200/derp/_search' -d '
+curl -XPOST 'http://192.168.82.170:9200/test1/_search' -d '
 {
 	  "size" : 10,
     "query" : {
@@ -30,7 +34,7 @@ curl -XPOST 'http://192.168.82.170:9200/derp/_search' -d '
 # GROUP BY user_id
 # WHERE timestamp A FROM B
 # ORDER BY CNT DESC
-curl -XPOST 'http://192.168.82.170:9200/derp/_search' -d '
+curl -XPOST 'http://192.168.82.170:9200/test1/_search' -d '
 {
   "size": 0,
   "query": {
@@ -58,7 +62,7 @@ curl -XPOST 'http://192.168.82.170:9200/derp/_search' -d '
 # WHERE timestamp A FROM B
 # ORDER BY CNT DESC
 
-curl -XPOST 'http://192.168.82.170:9200/derp/_search' -d '
+curl -XPOST 'http://192.168.82.170:9200/test1/_search' -d '
 {
   "size": 0,
   "query": {
@@ -86,7 +90,7 @@ curl -XPOST 'http://192.168.82.170:9200/derp/_search' -d '
 }
 '
 
-# group-by query for derp json 
+# group-by query for test1 json 
 # https://docs.google.com/document/d/1LBAhQR59FTWJ9umOKK8B9MugDMw0f2_HnUkPKBSn-kY/edit?usp=sharing
 
 exit 0
