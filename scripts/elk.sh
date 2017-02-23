@@ -16,7 +16,7 @@ echo 'export SRC_DIR='$SRC_DIR >> $PROJ_DIR/.bashrc
 source $PROJ_DIR/.bashrc
 
 apt-get update
-apt-get install openjdk-7-jdk curl -y
+apt-get install openjdk-8-jdk curl -y
 apt-get install nginx -y
 
 ### [install elasticsearch] ############################################################################################################
@@ -60,7 +60,7 @@ sed -i "s/es1/es3/g" $PROJ_DIR/node3/stop.sh
 chown -Rf vagrant:vagrant $PROJ_DIR
 
 echo "run all 3 nodes!"
-$PROJ_DIR/startall.sh
+sudo -u vagrant $PROJ_DIR/startall.sh
 
 ### [install elasticsearch-kopf] ############################################################################################################
 $PROJ_DIR/node1/bin/plugin install lmenezes/elasticsearch-kopf/2.1.1
@@ -81,12 +81,12 @@ mkdir $PROJ_DIR/logstash-2.2.2/patterns
 mkdir $PROJ_DIR/logstash-2.2.2/log_list
 cp $SRC_DIR/logstash/patterns/nginx $PROJ_DIR/logstash-2.2.2/patterns
 cp $SRC_DIR/logstash/log_list/nginx.conf $PROJ_DIR/logstash-2.2.2/log_list
-#cp $SRC_DIR/logstash/log_list/test1.conf $PROJ_DIR/logstash-2.2.2/log_list
+cp $SRC_DIR/logstash/log_list/test1.conf $PROJ_DIR/logstash-2.2.2/log_list
 
 chown -Rf vagrant:vagrant $PROJ_DIR
 
-$PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/nginx.conf &
-#$PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test1.conf &
+sudo -u vagrant $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/nginx.conf &
+sudo -u vagrant #$PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test1.conf &
 
 ### [install kibana] ############################################################################################################
 cd $PROJ_DIR
@@ -115,7 +115,7 @@ nginx
 
 ### [make test data] ############################################################################################################
 mkdir -p $PROJ_DIR/data
-cp $SRC_DIR/data/stats-2016-01-22.log $PROJ_DIR/data
+cp $SRC_DIR/data/stats-2017-02-22.log $PROJ_DIR/data
 
 chown -Rf vagrant:vagrant $PROJ_DIR
 

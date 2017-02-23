@@ -1,3 +1,5 @@
+export PROJ_DIR=/home/vagrant
+
 cd $PROJ_DIR 
 echo cd $PROJ_DIR
 

@@ -100,3 +100,9 @@ discovery.zen.ping.multicast.enabled: false
 # Require explicit names when deleting indices:
 #
 # action.destructive_requires_name: true
+
+http.cors.enabled: true
+#http.cors.allow-origin: /https?:\/\/.*/
+http.cors.allow-origin : "*"
+http.cors.allow-methods : OPTIONS, HEAD, GET, POST, PUT, DELETE
+http.cors.allow-headers : X-Requested-With,X-Auth-Token,Content-Type, Content-Length
