@@ -5,6 +5,7 @@ This is a ELK example on vagrant.
 	-. install ELK and make 3 ES nodes.
 	-. configure logstash for json foramt log
 	-. test script for simple query
+	-. install all on AWS
 
 # Execution
 	vagrant destroy -f && vagrant up
@@ -50,4 +51,17 @@ This is a ELK example on vagrant.
 	- change the query period for test1 data
 		2017-02-21 00:00:00.000 ~ 2017-02-21 00:00:00.000
 	
+# install all on AWS
+``` 
+	git clone https://github.com/doohee323/tz-elk.git
+	cd ~/tz-elk/scripts
+	bash elk_aws.sh <aws public ip address>
+	# cf. bash elk_aws.sh 13.124.70.17 
 	
+	cd ~
+	bash startall.sh 
+	# bash stopall.sh
+	
+	cd ~/tz-elk/scripts 
+	bash elk_test_aws.sh
+```

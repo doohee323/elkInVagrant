@@ -2,25 +2,25 @@
 
 set -x
 
-export SRC_DIR=/vagrant/resources
-export PROJ_DIR=/home/vagrant
+export SRC_DIR=/ubuntu/resources
+export PROJ_DIR=/home/ubuntu
 
 # remove es index
-curl -XDELETE 'http://192.168.82.170:9200/test1'
+curl -XDELETE 'http://localhost:9200/test1'
 
 # run logstash for test1
 # logstash filter -> json / ruby
 # You can use ruby for handling data in logstash for that, simply use this site for ruby env.
 # https://codepad.remoteinterview.io/BeamingMysteriousRoadOasis
 
-cp $SRC_DIR/logstash/log_list/test1.conf $PROJ_DIR/logstash-2.2.2/log_list
+cp $SRC_DIR/logstash/log_list/test1_aws.conf $PROJ_DIR/logstash-2.2.2/log_list/test1.conf
 $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test1.conf &
 
 # make logstash new data recognized 
 cp $PROJ_DIR/data/stats-2017-02-22.log $PROJ_DIR/data/stats-2017-02-23.log
 
 # query with hostname
-curl -XPOST 'http://192.168.82.170:9200/test1/_search' -d '
+curl -XPOST 'http://localhost:9200/test1/_search' -d '
 {
 	  "size" : 10,
     "query" : {
@@ -34,7 +34,7 @@ curl -XPOST 'http://192.168.82.170:9200/test1/_search' -d '
 # GROUP BY user_id
 # WHERE timestamp A FROM B
 # ORDER BY CNT DESC
-curl -XPOST 'http://192.168.82.170:9200/test1/_search' -d '
+curl -XPOST 'http://localhost:9200/test1/_search' -d '
 {
   "size": 0,
   "query": {
@@ -62,7 +62,7 @@ curl -XPOST 'http://192.168.82.170:9200/test1/_search' -d '
 # WHERE timestamp A FROM B
 # ORDER BY CNT DESC
 
-curl -XPOST 'http://192.168.82.170:9200/test1/_search' -d '
+curl -XPOST 'http://localhost:9200/test1/_search' -d '
 {
   "size": 0,
   "query": {
