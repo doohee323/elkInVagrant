@@ -80,10 +80,16 @@ cp $SRC_DIR/logstash/patterns/nginx $PROJ_DIR/logstash-2.2.2/patterns
 cp $SRC_DIR/logstash/log_list/nginx.conf $PROJ_DIR/logstash-2.2.2/log_list
 cp $SRC_DIR/logstash/log_list/test1.conf $PROJ_DIR/logstash-2.2.2/log_list
 
+### [geolocation] ############################################################################################################
+cd $PROJ_DIR/logstash-2.2.2
+wget http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz
+gunzip GeoLite2-City.mmdb.gz
+sudo chown vagrant:vagrant GeoLite*
+
 chown -Rf vagrant:vagrant $PROJ_DIR
 
 sudo -u vagrant $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/nginx.conf &
-sudo -u vagrant $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test1.conf &
+#sudo -u vagrant $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test1.conf &
 
 ### [install kibana] ############################################################################################################
 cd $PROJ_DIR
