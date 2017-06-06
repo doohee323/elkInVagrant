@@ -82,7 +82,7 @@ discovery:
     type: ec2 
     ec2:
         any_group: false                    # optional 
-        groups: tz_ELK # <EC2 SECURITY GROUP ID>   # optional
+        groups: test_ELK # <EC2 SECURITY GROUP ID>   # optional
 
 # For more information, see the documentation at:
 # <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery.html>

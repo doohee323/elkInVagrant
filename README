@@ -2,7 +2,7 @@ This is a ELK example on vagrant.
 ==========================================================================
 
 # Features
-	-. install ELK and make 3 ES nodes.
+	-. install version 5x ELK and make 2 ES nodes.
 	-. configure logstash for json foramt log
 	-. test script for simple query
 	-. install all on AWS
@@ -13,17 +13,18 @@ This is a ELK example on vagrant.
 # Run
 	cd /home/vagrant
 	1. elasticsearch
-		bash startall.sh
+		sudo service es1 stop
+		sudo service es1 start
 	2. kibana
-		$PROJ_DIR/kibana-4.4.1-linux-x64/bin/kibana > /dev/null 2>&1 &
+		sudo service kibana stop
+		sudo service kibana start
 	3. logstash
-		$PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/nginx.conf &
-		$PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test1.conf &
+		sudo systemctl stop logstash_nginx
+		sudo systemctl start logstash_nginx
 
 # installed applications
 	elasticsearch
-		http://192.168.82.170:9200/_plugin/kopf
-		http://192.168.82.170:9200/_plugin/head
+		http://192.168.82.170:9000
 	logstash
 	kibana		http://192.168.82.170:5601
 	nginx		http://192.168.82.170:8080 	# for access test
@@ -37,31 +38,18 @@ This is a ELK example on vagrant.
 	kibana
 		http://192.168.82.170:5601
 
-# test script
-	You can access to VM from outside like this script.
-	vagrant ssh
-	bash /vagrant/scripts/elk_test.sh
-
 # kibana setting
 	http://192.168.82.170:5601/app/kibana#/settings/indices
 	Index name or pattern
-		- test1
+		- nginx
 	Time-field name 
 		- timestamp
 	- change the query period for test1 data
-		2017-02-21 00:00:00.000 ~ 2017-02-21 00:00:00.000
+		2017-05-21 00:00:00.000 ~ 2017-05-21 00:00:00.000
 	
 # install all on AWS
 ``` 
 	git clone https://github.com/doohee323/tz-elk.git
 	cd ~/tz-elk/scripts
-	bash elk_aws.sh <aws public ip address>
-	# cf. bash elk_aws.sh 13.124.70.17 
-	
-	cd ~
-	bash startall.sh 
-	# bash stopall.sh
-	
-	cd ~/tz-elk/scripts 
-	bash elk_test_aws.sh
+	bash elk_aws.sh
 ```
