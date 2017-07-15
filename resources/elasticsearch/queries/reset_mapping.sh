@@ -1,8 +1,11 @@
 #         "format": "date_hour_minute_second_millis",
 
-curl -X DELETE 'http://localhost:9200/nginx';
+#curl -XGET -u 'elastic:test!323' 'localhost:9200/nginx*?pretty'
+#curl -XDELETE -u 'elastic:test!323' 'localhost:9200/nginx*?pretty'
 
-curl -X PUT 'http://localhost:9200/nginx' -d \
+curl -XDELETE -u 'elastic:test!323' 'http://localhost:9200/nginx';
+
+curl -XPUT -u 'elastic:test!323' 'http://localhost:9200/nginx' -d \
 '
 {
   "settings": {},
@@ -152,9 +155,9 @@ curl -X PUT 'http://localhost:9200/nginx' -d \
   }
 }';
 
-curl -X DELETE 'http://localhost:9200/stats';
+curl -XDELETE -u 'elastic:test!323' 'http://localhost:9200/stats';
 
-curl -X POST 'http://localhost:9200/stats' -d \
+curl -XPUT -u 'elastic:test!323' 'http://localhost:9200/stats' -d \
 '
 {
   "settings": {},

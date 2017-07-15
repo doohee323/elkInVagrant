@@ -152,10 +152,15 @@ path.config: /etc/logstash/conf.d
 #   * debug
 #   * trace
 #
-log.level: debug
+log.level: error
 path.logs: /var/log/logstash
 #
 # ------------ Other Settings --------------
 #
 # Where to find custom plugins
 # path.plugins: []
+
+xpack.monitoring.enabled: true
+xpack.monitoring.elasticsearch.url: "http://192.168.82.170:9200"
+xpack.monitoring.elasticsearch.username: "logstash_system"
+xpack.monitoring.elasticsearch.password: "test!323"

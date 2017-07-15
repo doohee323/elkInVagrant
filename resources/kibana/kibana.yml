@@ -80,4 +80,7 @@ server.host: "0.0.0.0"
 # and all requests.
 # logging.verbose: false
 
-xpack.security.enabled: false
+#xpack.security.enabled: false
+
+elasticsearch.password: test!323
+xpack.monitoring.elasticsearch.password: test!323

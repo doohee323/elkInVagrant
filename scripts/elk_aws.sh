@@ -3,8 +3,8 @@
 set -x
 
 export PROJ_NAME=elk
-export PROJ_DIR=/home/ubuntu
-export SRC_DIR=/home/ubuntu/tz-elk/resources
+export PROJ_DIR=/home/vagrant
+export SRC_DIR=/home/vagrant/tz-elk/resources
 
 echo '' >> $PROJ_DIR/.bashrc
 echo 'export PATH=$PATH:.' >> $PROJ_DIR/.bashrc
@@ -56,9 +56,9 @@ $PROJ_DIR/node3/bin/plugin install cloud-aws -b
 cd $PROJ_DIR
 wget https://github.com/lmenezes/cerebro/releases/download/v0.6.5/cerebro-0.6.5.tgz
 tar xvfz cerebro-0.6.5.tgz
-cd /home/ubuntu/cerebro-0.6.5/bin
-sudo cp $SRC_DIR/cerebro/application.conf /home/ubuntu/cerebro-0.6.5/conf
-rm -Rf /home/ubuntu/cerebro-0.6.5/RUNNING_PID
+cd /home/vagrant/cerebro-0.6.5/bin
+sudo cp $SRC_DIR/cerebro/application.conf /home/vagrant/cerebro-0.6.5/conf
+rm -Rf /home/vagrant/cerebro-0.6.5/RUNNING_PID
 ./cerebro &
 # http://core.local.xdn.com:9000
 # http://localhost:9200
