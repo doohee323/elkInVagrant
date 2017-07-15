@@ -24,6 +24,8 @@ echo 'export LOGSTASH_VERSION='$LOGSTASH_VERSION >> $PROJ_DIR/.bashrc
 echo 'export KIBANA_VERSION='$KIBANA_VERSION >> $PROJ_DIR/.bashrc
 source $PROJ_DIR/.bashrc
 
+export DEBIAN_FRONTEND=noninteractive
+
 apt-get update
 apt-get upgrade -y
 apt-get install unzip curl -y
