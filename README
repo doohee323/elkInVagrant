@@ -25,8 +25,13 @@ This is a ELK example on vagrant.
 # installed applications
 	elasticsearch
 		http://192.168.82.170:9000
+		elastic / test!323
+
 	logstash
+
 	kibana		http://192.168.82.170:5601
+		kibana / test!323
+
 	nginx		http://192.168.82.170:8080 	# for access test
 
 # service flow 
@@ -38,10 +43,15 @@ This is a ELK example on vagrant.
 	kibana
 		http://192.168.82.170:5601
 
+# test script
+	You can access to VM from outside like this script.
+	vagrant ssh
+	bash /vagrant/scripts/elk_test.sh
+
 # kibana setting
 	http://192.168.82.170:5601/app/kibana#/settings/indices
 	Index name or pattern
-		- nginx
+		- test1
 	Time-field name 
 		- timestamp
 	- change the query period for test1 data
@@ -49,6 +59,8 @@ This is a ELK example on vagrant.
 	
 # install all on AWS
 ``` 
+	su -
+	cd /home/ubuntu
 	git clone https://github.com/doohee323/tz-elk.git
 	cd ~/tz-elk/scripts
 	bash elk_aws.sh
