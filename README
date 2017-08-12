@@ -52,17 +52,20 @@ This is a ELK example on vagrant.
 		http://192.168.82.170:5601
 
 # test script
-	You can access to VM from outside like this script.
+	# You can make logs with this url
+	curl http://192.168.82.170:8080/
+
+	# You can make logs with this script
 	vagrant ssh
 	bash /vagrant/resources/elasticsearch/queries/elk_test.sh
 
 # kibana setting
-	http://192.168.82.170:5601/app/kibana#/settings/indices
+	http://192.168.82.170:5601/app/kibana#/management/kibana/index?_g=()
 	Index name or pattern
-		- test1
+		- nginx
 	Time-field name 
 		- timestamp
-	- change the query period for test1 data
+	- change the query period for nginx data
 		2017-05-21 00:00:00.000 ~ 2017-05-21 00:00:00.000
 
 # install elasticsearch x-pack
