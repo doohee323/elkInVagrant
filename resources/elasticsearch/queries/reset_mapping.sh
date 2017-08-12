@@ -1,11 +1,11 @@
 #         "format": "date_hour_minute_second_millis",
 
-#curl -XGET -u 'elastic:test!323' 'localhost:9200/nginx*?pretty'
-#curl -XDELETE -u 'elastic:test!323' 'localhost:9200/nginx*?pretty'
+#curl -XGET -u 'elastic:passwd323' 'localhost:9200/nginx*?pretty'
+#curl -XDELETE -u 'elastic:passwd323' 'localhost:9200/nginx*?pretty'
 
-curl -XDELETE -u 'elastic:test!323' 'http://localhost:9200/nginx';
+curl -XDELETE -u 'elastic:passwd323' 'http://localhost:9200/nginx';
 
-curl -XPUT -u 'elastic:test!323' 'http://localhost:9200/nginx' -d \
+curl -XPUT -u 'elastic:passwd323' 'http://localhost:9200/nginx' -d \
 '
 {
   "settings": {},
@@ -155,9 +155,9 @@ curl -XPUT -u 'elastic:test!323' 'http://localhost:9200/nginx' -d \
   }
 }';
 
-curl -XDELETE -u 'elastic:test!323' 'http://localhost:9200/stats';
+curl -XDELETE -u 'elastic:passwd323' 'http://localhost:9200/stats';
 
-curl -XPUT -u 'elastic:test!323' 'http://localhost:9200/stats' -d \
+curl -XPUT -u 'elastic:passwd323' 'http://localhost:9200/stats' -d \
 '
 {
   "settings": {},

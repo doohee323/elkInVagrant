@@ -161,7 +161,7 @@ path.logs: /var/log/logstash
 # path.plugins: []
 
 # xpack
-#xpack.monitoring.enabled: true
-#xpack.monitoring.elasticsearch.url: "http://192.168.82.170:9200"
-#xpack.monitoring.elasticsearch.username: "logstash_system"
-#xpack.monitoring.elasticsearch.password: "passwd323"
+xpack.monitoring.enabled: true
+xpack.monitoring.elasticsearch.url: "http://192.168.82.170:9200"
+xpack.monitoring.elasticsearch.username: "logstash_system"
+xpack.monitoring.elasticsearch.password: "passwd323"

@@ -35,7 +35,6 @@ add-apt-repository ppa:openjdk-r/ppa 2>&1
 
 ### [install elasticsearch] ############################################################################################################
 cd $PROJ_DIR
-rm -Rf node1 node2 node3
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
 echo 'deb https://artifacts.elastic.co/packages/5.x/apt stable main' | tee -a /etc/apt/sources.list.d/elastic-5.x.list
 apt-get update -y
@@ -45,20 +44,15 @@ echo "[INFO] Installing Elasticsearch..."
 apt-get install -y elasticsearch=$ELASTICSEARCH_VERSION
 update-rc.d elasticsearch defaults 95 10
 
-# isntall x-pack
-cd /usr/share/elasticsearch/bin
-#./elasticsearch-plugin remove x-pack
-./elasticsearch-plugin install --b x-pack 
-
 cp $SRC_DIR/elasticsearch/config/elasticsearch.yml /etc/elasticsearch/
 service elasticsearch stop
 
 # make 2 elasticsearch servers
 cd $SRC_DIR/elasticsearch
 bash make_es.sh es1
-bash make_es.sh es2
+#bash make_es.sh es2
 service es1 start
-service es2 start
+#service es2 start
 
 ### [cerebro] ############################################################################################################
 cd $PROJ_DIR
@@ -81,8 +75,6 @@ nginx
 ### [install logstash] ############################################################################################################
 echo "[INFO] Installing Logstash..."
 apt-get install -y logstash=$LOGSTASH_VERSION
-cd /usr/share/logstash/bin
-./logstash-plugin install x-pack
 
 cp $SRC_DIR/logstash/logstash.yml /etc/logstash/logstash.yml
 mkdir -p /usr/share/logstash/patterns
@@ -116,22 +108,13 @@ bash $SRC_DIR/logstash_register.sh logstash_nginx
 ### [install kibana] ############################################################################################################
 echo "[INFO] Installing Kibana..."
 apt-get install -y kibana=$KIBANA_VERSION
-
-# install x-pack
-cd /usr/share/kibana/bin
-./kibana-plugin install x-pack
-update-rc.d kibana defaults 96 9
 cp -R $SRC_DIR/kibana/kibana.yml /etc/kibana/kibana.yml
-service kibana start
 
 ### [service restart] ############################################################################################################
 service es1 restart
 #service es2 restart
 service kibana restart
 systemctl restart logstash_nginx
-
-### [add user & role] ############################################################################################################
-bash $SRC_DIR/elasticsearch/queries/add_user_role.sh
 
 # make nginx access log
 curl http://localhost:8080

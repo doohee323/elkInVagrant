@@ -1,10 +1,10 @@
-curl -XGET -u 'elastic:test!323' 'localhost:9200/_template/stats*?pretty'
+curl -XGET -u 'elastic:passwd323' 'localhost:9200/_template/stats*?pretty'
 
-curl -XDELETE -u 'elastic:test!323' 'localhost:9200/_template/stats?pretty'
+curl -XDELETE -u 'elastic:passwd323' 'localhost:9200/_template/stats?pretty'
 
 # "template": "stats*", : stats로 시작되는 index가 생성될 때 자동 적용됨
 
-curl -XPUT -u 'elastic:test!323' 'localhost:9200/_template/stats?pretty' -d'
+curl -XPUT -u 'elastic:passwd323' 'localhost:9200/_template/stats?pretty' -d'
 {
   "template": "stats*",
   "settings": {

@@ -27,6 +27,7 @@ sed -i "s/Provides:          elasticsearch/Provides:          $ES/g" /etc/init.d
 
 cp /vagrant/resources/elasticsearch/config/elasticsearch.yml /etc/elasticsearch/
 sed -i "s/network.bind_host: 0/network.bind_host: 0.0.0.0/g" /etc/$ES/elasticsearch.yml
+# for multi instances
 sed -i "s/#discovery.zen.ping.unicast.hosts/discovery.zen.ping.unicast.hosts/g" /etc/$ES/elasticsearch.yml
 sed -i "s/#discovery.zen.minimum_master_nodes/discovery.zen.minimum_master_nodes/g" /etc/$ES/elasticsearch.yml
 sed -i "s/#discovery.zen.ping.multicast.enabled/discovery.zen.ping.multicast.enabled/g" /etc/$ES/elasticsearch.yml
@@ -44,11 +45,4 @@ if [ "$ES" = "es3" ];then
 	sed -i "s/ 9200/ 9203/g" /etc/$ES/elasticsearch.yml
 	sed -i "s/node.master/#node.master/g" /etc/$ES/elasticsearch.yml
 fi
-
-#cd /usr/share/$ES/bin
-#./elasticsearch-plugin install -b x-pack
-#./elasticsearch-plugin remove x-pack; rm -Rf /etc/elasticsearch/x-pack
-
-update-rc.d $ES defaults 95 10
-#service $ES start
 
