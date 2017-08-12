@@ -8,7 +8,14 @@ This is a ELK example on vagrant.
 	-. install all on AWS
 
 # Execution
+```
+	* change the resource size according to your hardware spec.
+		vi /tz-elk/Vagrantfile
+			v.customize ["modifyvm", :id, "--cpus", "2"]
+			vb.customize ["modifyvm", :id, "--memory", "2048"]
+
 	vagrant destroy -f && vagrant up
+```
 	
 # Run
 	cd /home/vagrant
