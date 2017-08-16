@@ -1,0 +1,22 @@
+[Unit]
+Description=cerebro job
+After=network.target
+
+[Service]
+Type=simple
+Environment=JAVA_HOME=/usr/lib/jvm/java-8-oracle
+#Environment=JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
+Environment=HOME=/home/vagrant
+PIDFile=/usr/share/cerebro-0.6.5/RUNNING_PID
+WorkingDirectory=/usr/share/cerebro-0.6.5
+ExecStart=/usr/share/cerebro-0.6.5/bin/cerebro
+ExecStop=/bin/kill `ps -ef | grep cerebro | grep -v grep | awk '{print $2}'`
+
+Restart=on-failure
+RestartSec=30
+Group=root
+User=root
+
+[Install]
+WantedBy=default.target

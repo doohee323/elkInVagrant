@@ -58,10 +58,13 @@ service es1 start
 cd $PROJ_DIR
 wget https://github.com/lmenezes/cerebro/releases/download/v0.6.5/cerebro-0.6.5.tgz
 tar xvfz cerebro-0.6.5.tgz
-cd $PROJ_DIR/cerebro-0.6.5/bin
-cp $SRC_DIR/cerebro/application.conf $PROJ_DIR/cerebro-0.6.5/conf/application.conf
-rm -Rf $PROJ_DIR/cerebro-0.6.5/RUNNING_PID
-./cerebro &
+rm -Rf /usr/share/cerebro-0.6.5
+mv cerebro-0.6.5 /usr/share/cerebro-0.6.5
+cp $SRC_DIR/cerebro/application.conf /usr/share/cerebro-0.6.5/conf/application.conf
+cp $SRC_DIR/cerebro/systemd/system/cerebro.service /etc/systemd/system/cerebro.service
+cd /etc/systemd/system
+systemctl enable cerebro
+systemctl start cerebro
 # http://localhost:9000
 
 ### [nginx] ############################################################################################################
