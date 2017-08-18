@@ -68,11 +68,11 @@ systemctl start cerebro
 # http://localhost:9000
 
 ### [nginx] ############################################################################################################
-apt-get install nginx -y
-sudo cp $SRC_DIR/nginx/nginx.conf /etc/nginx/nginx.conf
-service nginx stop
-nginx -s stop
-nginx
+#apt-get install nginx -y
+#sudo cp $SRC_DIR/nginx/nginx.conf /etc/nginx/nginx.conf
+#service nginx stop
+#nginx -s stop
+#nginx
 # curl http://127.0.0.1:8080
 
 ### [install logstash] ############################################################################################################
@@ -82,8 +82,8 @@ apt-get install -y logstash=$LOGSTASH_VERSION
 cp $SRC_DIR/logstash/logstash.yml /etc/logstash/logstash.yml
 mkdir -p /usr/share/logstash/patterns
 
-cp $SRC_DIR/logstash/patterns/nginx /usr/share/logstash/patterns/nginx
-cp $SRC_DIR/logstash/log_list/nginx.conf /etc/logstash/conf.d/nginx.conf
+#cp $SRC_DIR/logstash/patterns/nginx /usr/share/logstash/patterns/nginx
+#cp $SRC_DIR/logstash/log_list/nginx.conf /etc/logstash/conf.d/nginx.conf
 
 chown -Rf $USER:$USER /etc/logstash
 chown -Rf $USER:$USER /usr/share/logstash
@@ -97,16 +97,11 @@ gunzip GeoLite2-City.mmdb.gz
 sudo chown $USER:$USER GeoLite*
 
 ### [launch logstash] ############################################################################################################
-cp $SRC_DIR/logstash/systemd/system/logstash_nginx.service /etc/systemd/system/logstash_nginx.service
-bash $SRC_DIR/logstash_register.sh logstash_nginx
-systemctl stop logstash_nginx
-systemctl start logstash_nginx
+cp $SRC_DIR/logstash/systemd/system/logstash_multi.service /etc/systemd/system/logstash_multi.service
+bash $SRC_DIR/logstash_register.sh logstash_multi
+systemctl stop logstash_multi
+systemctl start logstash_multi
 #sudo -u $USER /usr/share/logstash/bin/logstash --path.settings=/etc/logstash -f /etc/logstash/conf.d/nginx.conf &
-
-cp $SRC_DIR/logstash/systemd/system/logstash_nginx.service /etc/systemd/system/logstash_nginx.service
-bash $SRC_DIR/logstash_register.sh logstash_nginx
-#systemctl stop logstash_nginx
-#systemctl start logstash_nginx
 
 ### [install kibana] ############################################################################################################
 echo "[INFO] Installing Kibana..."
@@ -117,10 +112,10 @@ cp -R $SRC_DIR/kibana/kibana.yml /etc/kibana/kibana.yml
 service es1 restart
 #service es2 restart
 service kibana restart
-systemctl restart logstash_nginx
+systemctl restart logstash_multi
 
 # make nginx access log
-curl http://localhost:8080
+#curl http://localhost:8080
 
 ### [make template & mapping] ############################################################################################################
 bash $SRC_DIR/elasticsearch/queries/template.sh
@@ -132,8 +127,11 @@ killall cerebro
 ./cerebro &
 
 ### [make test data] ############################################################################################################
-mkdir -p $PROJ_DIR/data
-cp $SRC_DIR/data/stats-2017-02-22.log /opt/tomcat/data
-chown -Rf vagrant:vagrant $PROJ_DIR
+#mkdir -p $PROJ_DIR/data
+#cp $SRC_DIR/data/stats-2017-02-22.log /opt/tomcat/data
+#chown -Rf vagrant:vagrant $PROJ_DIR
+
+### [build application] ############################################################################################################
+bash /vagrant/scripts/tz-vagrant.sh
 
 exit 0

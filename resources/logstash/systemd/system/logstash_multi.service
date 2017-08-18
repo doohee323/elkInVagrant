@@ -1,0 +1,21 @@
+[Unit]
+Description=logstash_multi job
+After=network.target
+
+[Service]
+Type=simple
+#Environment=JAVA_HOME=/usr/lib/jvm/java-8-oracle
+Environment=JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+Environment=HOME=/home/vagrant
+PIDFile=/usr/share/logstash/logstash_multi.pid
+WorkingDirectory=/usr/share/logstash
+ExecStart=/usr/share/logstash/bin/logstash --path.settings=/etc/logstash -f /etc/logstash/conf.d/multi.conf
+ExecStop=/bin/kill -9 `ps -ef | grep multi.conf | grep -v grep | awk '{print $2}'`
+
+Restart=on-failure
+RestartSec=30
+Group=root
+User=root
+
+[Install]
+WantedBy=default.target
