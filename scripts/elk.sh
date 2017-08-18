@@ -84,6 +84,7 @@ mkdir -p /usr/share/logstash/patterns
 
 #cp $SRC_DIR/logstash/patterns/nginx /usr/share/logstash/patterns/nginx
 #cp $SRC_DIR/logstash/log_list/nginx.conf /etc/logstash/conf.d/nginx.conf
+cp $SRC_DIR/logstash/log_list/multi.conf /etc/logstash/conf.d/multi.conf
 
 chown -Rf $USER:$USER /etc/logstash
 chown -Rf $USER:$USER /usr/share/logstash

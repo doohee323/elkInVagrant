@@ -3,6 +3,10 @@
 if [ ! -d "tz-spring-boot" ]; then
 	echo "git clone https://github.com/doohee323/tz-spring-boot.git"
 	git clone https://github.com/doohee323/tz-spring-boot.git
+	# need to use branch "multi"
+	cd tz-spring-boot
+	git fetch origin
+	git checkout multi
 fi
 
 if [ ! -d "tz-angular1.4" ]; then
