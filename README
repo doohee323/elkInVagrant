@@ -7,6 +7,7 @@ This is a ELK example on vagrant.
 	-. test script for simple query
 	-. install all on AWS
 	-. install elasticsearch x-pack
+	-. application integration test env. (branch: multi)
 
 # Execution
 ```
@@ -15,7 +16,10 @@ This is a ELK example on vagrant.
 			v.customize ["modifyvm", :id, "--cpus", "2"]
 			vb.customize ["modifyvm", :id, "--memory", "2048"]
 
-	vagrant destroy -f && vagrant up
+	* for application integration test env. (branch: multi)
+		refer to https://github.com/doohee323/tz-vagrant
+		
+		bash build.sh
 ```
 	
 # Run
