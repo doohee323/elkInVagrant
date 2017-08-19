@@ -8,10 +8,10 @@ export PROJ_DIR=/home/$USER
 export SRC_DIR=/vagrant/resources
 
 # set the ELK package versions
-ELASTIC_VERSION=5.4.1
-ELASTICSEARCH_VERSION=5.4.1
-LOGSTASH_VERSION=1:5.4.1-1
-KIBANA_VERSION=5.4.1
+ELASTIC_VERSION=5.5.2
+ELASTICSEARCH_VERSION=5.5.2
+LOGSTASH_VERSION=1:5.5.2-1
+KIBANA_VERSION=5.5.2
 
 echo '' >> $PROJ_DIR/.bashrc
 echo 'export PATH=$PATH:.' >> $PROJ_DIR/.bashrc
@@ -41,7 +41,8 @@ apt-get update -y
 apt-get install -y openjdk-8-jdk -y
 
 echo "[INFO] Installing Elasticsearch..."
-apt-get install -y elasticsearch=$ELASTICSEARCH_VERSION
+#apt-get purge elasticsearch=$ELASTICSEARCH_VERSION -y
+apt-get install elasticsearch=$ELASTICSEARCH_VERSION -y 
 update-rc.d elasticsearch defaults 95 10
 
 cp $SRC_DIR/elasticsearch/config/elasticsearch.yml /etc/elasticsearch/
@@ -77,12 +78,14 @@ systemctl start cerebro
 
 ### [install logstash] ############################################################################################################
 echo "[INFO] Installing Logstash..."
-apt-get install -y logstash=$LOGSTASH_VERSION
+#apt-get purge logstash=$LOGSTASH_VERSION -y 
+apt-get install logstash=$LOGSTASH_VERSION -y 
 
 cp $SRC_DIR/logstash/logstash.yml /etc/logstash/logstash.yml
 mkdir -p /usr/share/logstash/patterns
 
-#cp $SRC_DIR/logstash/patterns/nginx /usr/share/logstash/patterns/nginx
+cp $SRC_DIR/logstash/patterns/nginx /usr/share/logstash/patterns/nginx
+
 #cp $SRC_DIR/logstash/log_list/nginx.conf /etc/logstash/conf.d/nginx.conf
 cp $SRC_DIR/logstash/log_list/multi.conf /etc/logstash/conf.d/multi.conf
 
@@ -106,7 +109,8 @@ systemctl start logstash_multi
 
 ### [install kibana] ############################################################################################################
 echo "[INFO] Installing Kibana..."
-apt-get install -y kibana=$KIBANA_VERSION
+#apt-get purge kibana=$KIBANA_VERSION -y 
+apt-get install kibana=$KIBANA_VERSION -y 
 cp -R $SRC_DIR/kibana/kibana.yml /etc/kibana/kibana.yml
 
 ### [service restart] ############################################################################################################
@@ -114,13 +118,10 @@ service es1 restart
 #service es2 restart
 service kibana restart
 systemctl restart logstash_multi
+#systemctl stop logstash_multi
 
 # make nginx access log
 #curl http://localhost:8080
-
-### [make template & mapping] ############################################################################################################
-bash $SRC_DIR/elasticsearch/queries/template.sh
-bash $SRC_DIR/elasticsearch/queries/reset_mapping.sh
 
 cd $PROJ_DIR/cerebro-0.6.5/bin
 rm -Rf $PROJ_DIR/cerebro-0.6.5/RUNNING_PID
@@ -134,5 +135,9 @@ killall cerebro
 
 ### [build application] ############################################################################################################
 bash /vagrant/scripts/tz-vagrant.sh
+
+### [make template & mapping] ############################################################################################################
+bash $SRC_DIR/elasticsearch/queries/template.sh
+bash $SRC_DIR/elasticsearch/queries/reset_mapping.sh
 
 exit 0
