@@ -40,18 +40,16 @@ This is a ELK example on vagrant.
 # installed applications
 	elasticsearch
 		http://192.168.82.170:9000
-		elastic / passwd323
 
 	logstash
 
 	kibana		http://192.168.82.170:5601
-		kibana / passwd323
 
-	nginx		http://192.168.82.170:8080 	# for access test
+	nginx		http://192.168.82.170:80 	# for access test
 
 # service flow 
 	nginx
-		http://192.168.82.170:8080
+		http://192.168.82.170:80
 		/var/log/nginx/access.log
 	logstash
 		send access.log to elasticsearch
@@ -60,7 +58,7 @@ This is a ELK example on vagrant.
 
 # test script
 	# You can make logs with this url
-	curl http://192.168.82.170:8080/
+	curl http://192.168.82.170:80/
 
 	# You can make logs with this script
 	vagrant ssh
