@@ -31,8 +31,8 @@ This is a ELK example on vagrant.
 		sudo service kibana stop
 		sudo service kibana start
 	3. logstash
-		sudo systemctl stop logstash_nginx
-		sudo systemctl start logstash_nginx
+		sudo systemctl stop logstash_multi
+		sudo systemctl start logstash_multi
 
 # installed applications
 	elasticsearch
