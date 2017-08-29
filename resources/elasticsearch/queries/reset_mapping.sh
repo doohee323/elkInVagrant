@@ -118,31 +118,10 @@ curl -XPUT -u 'elastic:passwd323' 'http://localhost:9200/nginx' -d \
       },
       "user_agent": {
         "properties": {
-          "patch": {
-            "type": "string"
-          },
-          "major": {
-            "type": "string"
-          },
-          "minor": {
-            "type": "string"
-          },
           "os": {
             "type": "string"
           },
-          "build": {
-            "type": "string"
-          },
-          "os_minor": {
-            "type": "string"
-          },
-          "os_major": {
-            "type": "string"
-          },
           "name": {
-            "type": "string"
-          },
-          "os_name": {
             "type": "string"
           },
           "device": {
