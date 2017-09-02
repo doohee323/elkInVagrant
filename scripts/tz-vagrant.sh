@@ -146,7 +146,7 @@ bash /vagrant/scripts/mysql.sh
 bash /vagrant/scripts/server.sh
 bash /vagrant/scripts/ui.sh
 
-cat <(crontab -l) <(echo "* * * * * sudo /bin/bash $PROJ_DIR/scripts/deploy.sh") | crontab -
+#cat <(crontab -l) <(echo "* * * * * sudo /bin/bash $PROJ_DIR/scripts/deploy.sh") | crontab -
 
 ###############################################################
 # start services

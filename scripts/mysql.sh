@@ -55,11 +55,9 @@ FLUSH PRIVILEGES; \
 
 cd /vagrant/resources/mysql
 # export
-#mysqldump -u tzuser -h 192.168.82.170 -p --add-drop-table tz_dev --port 3306 > tz_dev.sql
-#passwd123
+# mysqldump tz_dev --user=tzuser --password=passwd123 --host=192.168.82.170 --port 3306 > tz_dev.sql
 
-# import
-#mysql -u tzuser -h 192.168.82.170 -p tz_dev < tz_dev.sql 
-#passwd123
+# import 
+mysql tz_dev --user=tzuser --password=passwd123 --host=192.168.82.170 --port 3306 < tz_dev.sql
 
 exit 0
