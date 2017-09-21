@@ -32,4 +32,9 @@ bower install --allow-root
 
 sudo /bin/bash /vagrant/scripts/deploy.sh
 
+###[ adminlte ]###############################################
+git clone https://github.com/almasaeed2010/AdminLTE.git
+mv AdminLTE /var/www/html/adminlte
+chown -Rf www-data:www-data /var/www/html/adminlte
+
 exit 0

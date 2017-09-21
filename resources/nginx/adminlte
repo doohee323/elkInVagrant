@@ -1,0 +1,13 @@
+server {
+    listen 80;
+
+    root /var/www/html/adminlte;
+    index index.jsp index.html index.htm;
+
+    server_name dev2.tz.com;
+
+    error_page 404 401 /404.html;
+    location = /404.html {
+        internal;
+    }
+}

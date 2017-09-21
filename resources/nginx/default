@@ -1,11 +1,10 @@
 server {
-    listen 80 default_server;
-    listen [::]:80 default_server ipv6only=on;
+    listen 80;
 
     root /var/www/html;
     index index.jsp index.html index.htm;
 
-    #server_name dev.tz.com;
+    server_name dev.tz.com;
 
     #error_page 404 /404.html;
     
