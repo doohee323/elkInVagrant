@@ -31,9 +31,12 @@ This is a ELK example on vagrant.
 		sudo service kibana stop
 		sudo service kibana start
 	3. logstash
-		sudo systemctl stop logstash_multi
-		sudo systemctl start logstash_multi
-	4. cerebro
+		sudo systemctl stop logstash_beats
+		sudo systemctl start logstash_beats
+	4. beats
+		sudo /etc/init.d/filebeat stop
+		sudo/etc/init.d/filebeat start
+	5. cerebro
 		sudo systemctl stop cerebro
 		sudo systemctl start cerebro
 
@@ -41,6 +44,8 @@ This is a ELK example on vagrant.
 	elasticsearch
 		http://192.168.82.170:9000
 
+	beats
+	
 	logstash
 
 	kibana		http://192.168.82.170:5601

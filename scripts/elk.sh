@@ -11,6 +11,7 @@ export SRC_DIR=/vagrant/resources
 ELASTIC_VERSION=5.5.2
 ELASTICSEARCH_VERSION=5.5.2
 LOGSTASH_VERSION=1:5.5.2-1
+BEATS_VERSION=5.5.2
 KIBANA_VERSION=5.5.2
 
 echo '' >> $PROJ_DIR/.bashrc
@@ -76,6 +77,12 @@ systemctl start cerebro
 #nginx
 # curl http://127.0.0.1:8080
 
+### [install beats] ############################################################################################################
+curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-$BEATS_VERSION-amd64.deb
+sudo dpkg -i filebeat-$BEATS_VERSION-amd64.deb
+cp -Rf $SRC_DIR/beats/filebeat.yml /etc/filebeat/filebeat.yml
+sudo /etc/init.d/filebeat stop  
+
 ### [install logstash] ############################################################################################################
 echo "[INFO] Installing Logstash..."
 #apt-get purge logstash=$LOGSTASH_VERSION -y 
@@ -88,6 +95,8 @@ cp $SRC_DIR/logstash/patterns/nginx /usr/share/logstash/patterns/nginx
 
 #cp $SRC_DIR/logstash/log_list/nginx.conf /etc/logstash/conf.d/nginx.conf
 cp $SRC_DIR/logstash/log_list/multi.conf /etc/logstash/conf.d/multi.conf
+
+cp $SRC_DIR/logstash/log_list/beats.conf /etc/logstash/conf.d/beats.conf
 
 chown -Rf $USER:$USER /etc/logstash
 chown -Rf $USER:$USER /usr/share/logstash
@@ -102,10 +111,15 @@ sudo chown $USER:$USER GeoLite*
 
 ### [launch logstash] ############################################################################################################
 cp $SRC_DIR/logstash/systemd/system/logstash_multi.service /etc/systemd/system/logstash_multi.service
-bash $SRC_DIR/logstash_register.sh logstash_multi
-systemctl stop logstash_multi
-systemctl start logstash_multi
+#bash $SRC_DIR/logstash_register.sh logstash_multi
+#systemctl stop logstash_multi
+#systemctl start logstash_multi
 #sudo -u $USER /usr/share/logstash/bin/logstash --path.settings=/etc/logstash -f /etc/logstash/conf.d/nginx.conf &
+
+cp $SRC_DIR/logstash/systemd/system/logstash_beats.service /etc/systemd/system/logstash_beats.service
+bash $SRC_DIR/logstash_register.sh logstash_beats
+systemctl stop logstash_beats
+systemctl start logstash_beats
 
 ### [install kibana] ############################################################################################################
 echo "[INFO] Installing Kibana..."
@@ -117,8 +131,9 @@ cp -R $SRC_DIR/kibana/kibana.yml /etc/kibana/kibana.yml
 service es1 restart
 #service es2 restart
 service kibana restart
-systemctl restart logstash_multi
-#systemctl stop logstash_multi
+/etc/init.d/filebeat restart
+systemctl restart logstash_beats
+#systemctl stop logstash_beats
 
 # make nginx access log
 #curl http://localhost:8080
