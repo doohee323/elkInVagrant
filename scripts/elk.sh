@@ -70,11 +70,11 @@ systemctl start cerebro
 # http://localhost:9000
 
 ### [nginx] ############################################################################################################
-#apt-get install nginx -y
-#sudo cp $SRC_DIR/nginx/nginx.conf /etc/nginx/nginx.conf
-#service nginx stop
-#nginx -s stop
-#nginx
+apt-get install nginx -y
+sudo cp $SRC_DIR/nginx/nginx.conf /etc/nginx/nginx.conf
+service nginx stop
+nginx -s stop
+nginx
 # curl http://127.0.0.1:8080
 
 ### [install beats] ############################################################################################################
